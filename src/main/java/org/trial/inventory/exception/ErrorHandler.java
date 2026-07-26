@@ -10,9 +10,9 @@ import org.trial.inventory.dto.CustomException;
 
 @RestControllerAdvice
 @Slf4j
-public class ErrorHandler {
+public class ErrorHandler extends RuntimeException{
 
-    @ExceptionHandler
+    @ExceptionHandler(IllegalArgumentException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<CustomException> handleException(Exception e) {
         log.error(e.getMessage());
@@ -23,29 +23,31 @@ public class ErrorHandler {
                         .build()
         );
     }
-//
-//    @ExceptionHandler --500
-//    @ResponseStatus(HttpStatus.BAD_REQUEST)
-//    public ResponseEntity<CustomException> handleException(Exception e) {
-//        log.error(e.getMessage());
-//        return ResponseEntity.badRequest().body(
-//                CustomException.builder()
-//                        .statusCode("400")
-//                        .errorMessage(e.getMessage())
-//                        .build()
-//        );
-//    }@ExceptionHandler -- 404
-//    @ResponseStatus(HttpStatus.BAD_REQUEST)
-//    public ResponseEntity<CustomException> handleException(Exception e) {
-//        log.error(e.getMessage());
-//        return ResponseEntity.badRequest().body(
-//                CustomException.builder()
-//                        .statusCode("400")
-//                        .errorMessage(e.getMessage())
-//                        .build()
-//        );
 
-//    }@ExceptionHandler --403
+    @ExceptionHandler(Exception.class)
+    @ResponseStatus(HttpStatus.SERVICE_UNAVAILABLE)
+    public ResponseEntity<CustomException> handleExceptionWhenServiceIsUnavailable(Exception e) {
+        log.error(e.getMessage());
+        return ResponseEntity.internalServerError().body(
+                CustomException.builder()
+                        .statusCode("500")
+                        .errorMessage(e.getMessage())
+                        .build()
+        );
+    }
+//    @ExceptionHandler
+//    @ResponseStatus(HttpStatus.NOT_FOUND)
+//    public ResponseEntity<CustomException> handleExceptionWhenNotFound(Exception e) {
+//        log.error(e.getMessage());
+//        return ResponseEntity.badRequest().body(
+//                CustomException.builder()
+//                        .statusCode("400")
+//                        .errorMessage(e.getMessage())
+//                        .build()
+//        );
+//
+//    }
+
 //    @ResponseStatus(HttpStatus.BAD_REQUEST)
 //    public ResponseEntity<CustomException> handleException(Exception e) {
 //        log.error(e.getMessage());
