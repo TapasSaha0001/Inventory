@@ -18,7 +18,7 @@ public class Menu {
     @Id
     private String id;
 
-    @Field("product_name") // Optional: Maps the Java field to a specific key name in the MongoDB document.
+    @Field("product_name")
     private String name;
 
     private String description;

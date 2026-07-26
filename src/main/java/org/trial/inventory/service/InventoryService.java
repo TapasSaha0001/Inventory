@@ -28,4 +28,6 @@ public class InventoryService {
     public List<Stock> addStocks(List<Stock> stockList) {
         return inventoryRepo.saveAll(stockList);
     }
+
+
 }

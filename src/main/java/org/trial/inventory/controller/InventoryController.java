@@ -19,12 +19,10 @@ public class InventoryController {
     public List<Menu> getMenu() {
         return inventoryService.getMenuDetails();
     }
-
     @PostMapping("menuEntry")
     public List<Menu> setMenu(@RequestBody List<Menu> menu) {
         return inventoryService.saveMenu(menu);
     }
-
     @PostMapping("stock")
     public List<Stock> setStock(@RequestBody List<Stock> stockList) {
         return inventoryService.addStocks(stockList);

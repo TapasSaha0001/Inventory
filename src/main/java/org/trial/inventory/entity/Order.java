@@ -7,17 +7,19 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "stocks")
+import java.util.Map;
+
+@Document(collection = "orders")
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
-public class Stock {
+public class Order {
 
     @Id
-    private String id;
+    private String orderId;
 
-    private Long itemCount;
-    private String itemName;
-    private Double itemPrice;
+    private Double orderTotalPrice;
+    private String orderTaxes;
+    private Map<String, Double> itemsWithPrice;
 }
