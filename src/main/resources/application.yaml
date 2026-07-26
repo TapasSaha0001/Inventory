@@ -1,3 +1,7 @@
 spring:
   application:
     name: Inventory
+  mongodb:
+    database: Inventory
+    port: 27017
+    host: localhost
